@@ -9,7 +9,17 @@ The platform tracks buy and sell trades, market prices, financial exposure, esti
 - **Backend:** Python, FastAPI, SQLModel, Pydantic, async SQLite, and an `asyncio` risk monitor.
 - **Frontend:** React, TypeScript, Vite, Tailwind CSS, Axios, Recharts, and Lucide.
 
-## Run locally
+## Run the demo with Docker
+
+With Docker and Docker Compose running, start the demo from the repository root:
+
+```sh
+docker compose up --build -d
+```
+
+Open [localhost:8088](http://localhost:8088). The demo uses synthetic data and stores changes in a Docker volume. Use `docker compose down` to stop the demo and keep the data.
+
+## Run locally without Docker
 
 Run the backend and frontend in separate terminals. See the [backend setup](backend/README.md) for Python and database configuration and the [frontend setup](frontend/README.md) for the Vite app.
 
