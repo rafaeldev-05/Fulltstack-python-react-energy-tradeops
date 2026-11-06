@@ -1,23 +1,26 @@
-# Frontend - Energy TradeOps Platform
+# Energy TradeOps Frontend
 
-SPA React + TypeScript criada com Vite, Tailwind CSS, Axios, Recharts e lucide-react.
+A React and TypeScript single-page application built with Vite, Tailwind CSS, Axios, Recharts, and Lucide.
 
-## Rodar localmente
+## Run locally
 
-```bash
+From the repository root:
+
+```sh
+cd frontend
 npm install
 npm run dev
 ```
 
-Por padrão, o frontend consome `http://localhost:8000/api/v1`. Para mudar:
+Open http://localhost:5173. Start the backend separately so the UI can load data.
 
-```bash
-VITE_API_BASE_URL=http://localhost:8000/api/v1 npm run dev
-```
+The frontend uses `http://localhost:8000/api/v1` by default. To use another API address, set `VITE_API_BASE_URL` in a `.env.local` file in this directory.
 
-## Telas
+Run `npm run build` to type-check the code and create a production build.
 
-- Dashboard executivo
+## Screens
+
+- Executive Dashboard
 - Trade Operations
 - Market Prices
 - Logistics

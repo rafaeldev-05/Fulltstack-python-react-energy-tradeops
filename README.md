@@ -1,126 +1,42 @@
 # Energy TradeOps Platform
 
-Plataforma fullstack de portfólio para simular operações globais de trading de commodities energéticas, supply chain analytics e risk control.
+A full-stack portfolio project that simulates energy commodity trading, shipment tracking, and operational risk monitoring with synthetic data.
 
-## Objetivo
+The platform tracks buy and sell trades, market prices, financial exposure, estimated margins, shipments, volatility, and risk alerts for commodities such as crude oil, natural gas, diesel, gasoline, naphtha, and petrochemicals.
 
-O projeto demonstra uma solução corporativa para acompanhar contratos de compra e venda, preços de mercado, exposição financeira, margem estimada, logística, volatilidade e alertas operacionais em commodities como petróleo, gás natural, diesel, gasolina, nafta e petroquímicos.
+## Technology stack
 
-## Tecnologias
+- **Backend:** Python, FastAPI, SQLModel, Pydantic, async SQLite, and an `asyncio` risk monitor.
+- **Frontend:** React, TypeScript, Vite, Tailwind CSS, Axios, Recharts, and Lucide.
 
-Backend:
+## Run locally
 
-- Python
-- FastAPI
-- SQLModel
-- Pydantic
-- SQLite com engine async
-- Arquitetura preparada para PostgreSQL
-- Worker assíncrono com `asyncio`
+Run the backend and frontend in separate terminals. See the [backend setup](backend/README.md) for Python and database configuration and the [frontend setup](frontend/README.md) for the Vite app.
 
-Frontend:
+- Web app: http://localhost:5173
+- Interactive API docs: http://localhost:8000/docs
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- Axios
-- Recharts
-- lucide-react
+## Features
 
-## Arquitetura
+- **Executive Dashboard:** Review exposure, traded volume, estimated margins, critical alerts, and shipment delays.
+- **Trade Operations:** List and filter trades, create orders, and confirm, settle, or cancel trades.
+- **Market Prices:** Record prices and review price history and changes over time.
+- **Logistics:** Create shipments and mark them as delayed or delivered.
+- **Risk Center:** Review alerts by severity and resolve them.
 
-```txt
-backend/app
-  models          Entidades SQLModel
-  schemas         Contratos Pydantic
-  repositories    Acesso a dados
-  services        Regras de negócio e analytics
-  api/routes      Endpoints REST
-  workers         Monitoramento assíncrono de risco
-  utils           Seed de dados
+With seeding enabled, a fresh database starts with eight commodities, 90 days of price history, 100 trades, 60 shipments, 20 initial alerts, and synthetic counterparties and regions. The risk monitor can generate additional alerts after seeding.
 
-frontend/src
-  components      UI reutilizável
-  pages           Telas operacionais
-  services        Cliente HTTP
-  hooks           Hooks de carregamento
-  types           Tipos TypeScript
-  utils           Formatadores
-```
+## Documentation
 
-## Rodar Backend
+- [Architecture](docs/architecture.md)
+- [REST endpoints](docs/endpoints.md)
+- [Business rules](docs/business-rules.md)
 
-```bash
-cd backend
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-```
+## Planned work
 
-Swagger/OpenAPI: http://localhost:8000/docs
-
-## Rodar Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Aplicação: http://localhost:5173
-
-## Seed de Dados
-
-Na primeira execução, a API cria:
-
-- 8 commodities;
-- 90 dias de histórico de preços;
-- 100 operações de trading;
-- 60 shipments;
-- 20 alertas iniciais de risco;
-- regiões e contrapartes fictícias.
-
-## Principais Endpoints
-
-- `GET /api/v1/analytics/summary`
-- `GET /api/v1/trades`
-- `POST /api/v1/trades`
-- `PATCH /api/v1/trades/{id}/confirm`
-- `PATCH /api/v1/trades/{id}/settle`
-- `PATCH /api/v1/trades/{id}/cancel`
-- `GET /api/v1/market-prices/{commodity_id}`
-- `POST /api/v1/shipments`
-- `GET /api/v1/risk-alerts`
-
-Lista completa em `docs/endpoints.md`.
-
-## Telas
-
-- Dashboard executivo com exposição, volume, margem, alertas críticos, atrasos e gráficos.
-- Trade Operations com listagem, filtros, criação, confirmação, liquidação e cancelamento.
-- Market Prices com cadastro de preço, histórico e evolução.
-- Logistics com criação de shipment, marcação de atraso e entrega.
-- Risk Center com alertas por severidade e resolução.
-
-## Regras de Negócio
-
-- Margem estimada compara preço negociado com preço de mercado.
-- Compra gera exposição positiva; venda gera exposição negativa.
-- Trades canceladas não podem ser liquidadas.
-- Trades liquidadas não podem ser canceladas.
-- Shipments atrasados geram alertas.
-- Alta volatilidade gera alerta automático.
-- Margem negativa acima do limite configurado gera alerta de risco.
-
-Mais detalhes em `docs/regras-de-negocio.md`.
-
-## Próximos Passos
-
-- Autenticação e RBAC por área: Trading, Risk, Finance e Logistics.
-- PostgreSQL com migrações Alembic.
-- WebSockets para atualização em tempo real.
-- Importação de curvas de preço via CSV/API externa.
-- Testes de integração para endpoints críticos.
-- Docker Compose para ambiente completo.
+- Authentication and role-based access for Trading, Risk, Finance, and Logistics.
+- PostgreSQL migrations with Alembic.
+- Live updates via WebSockets.
+- Price curve imports from CSV files or external APIs.
+- Integration tests for critical endpoints.
+- Docker Compose for local setup.

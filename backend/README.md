@@ -1,24 +1,27 @@
-# Backend - Energy TradeOps Platform
+# Energy TradeOps Backend
 
-API FastAPI assíncrona para operações de trading, preços de mercado, logística, analytics e alertas de risco.
+Asynchronous FastAPI service for trade operations, market prices, logistics, analytics, and risk alerts.
 
-## Rodar localmente
+## Run locally
 
-```bash
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload
+From the repository root, enter the backend directory and create a virtual environment with Python 3.10 or later.
+
+```sh
+cd backend
+python -m venv .venv
 ```
 
-No Linux/macOS, use `source venv/bin/activate`.
+Activate it with `source .venv/bin/activate` on macOS or Linux, or `.venv\Scripts\Activate.ps1` in Windows PowerShell. Then run:
 
-Swagger: http://localhost:8000/docs
+```sh
+python -m pip install -r requirements.txt
+python -m uvicorn app.main:app --reload
+```
 
-## Banco
+Open the interactive API documentation at http://localhost:8000/docs. Run the backend tests from this directory with `python -m pytest`.
 
-O padrão é SQLite em `energy_tradeops.db`. Para PostgreSQL futuramente, configure `DATABASE_URL` no `.env` usando um driver async compatível.
+## Database and startup
 
-## Seed e worker
+The default database is SQLite in `energy_tradeops.db`. The `DATABASE_URL` setting can point to PostgreSQL if an asynchronous PostgreSQL driver is installed.
 
-Ao iniciar, a API cria tabelas, popula dados simulados e executa um ciclo de monitoramento de risco. O worker assíncrono periódico fica em `app/workers/risk_monitor.py`.
+On startup, the app creates tables and can seed synthetic data and run a risk monitoring cycle. The periodic worker is in `app/workers/risk_monitor.py`.

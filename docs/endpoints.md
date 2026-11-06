@@ -1,6 +1,6 @@
 # Endpoints
 
-Base URL local: `http://localhost:8000/api/v1`
+Local base URL: `http://localhost:8000/api/v1`
 
 ## Commodities
 
